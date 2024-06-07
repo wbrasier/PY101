@@ -8,10 +8,9 @@
 import json
 import sys
 
+# opens json file with text as json object and stores it as dict
 with open('calculator_messages.json', 'r') as file:
-    data = json.load(file)
-
-print(data)
+    MESSAGES = json.load(file)
 
 def prompt(message):
     print(f'=> {message}')
@@ -27,39 +26,39 @@ def invalid_number(number_str):
 
 # Asks the user if they want to calculate again, exits the program if not
 def again():
-    prompt("Would you like to perform another calculation? (Y/N)")
+    prompt(MESSAGES['again?'])
     while True:
         answer = input().capitalize()
         if answer in ('Y', 'Yes'):
             return True
         if answer in ('N', 'No'):
-            prompt("Thanks for calculating with me! Have a great day!")
+            prompt(MESSAGES['goodbye'])
             sys.exit(0)
         else:
-            prompt("Hmmm... you must type Y for yes or N for no.")
+            prompt(MESSAGES['invalid again'])
 
 # main calculate function
 def calculate():
     # Ask the user for the first number
-    prompt("What's the first number?")
+    prompt(MESSAGES['first num'])
     number1 = input()
 
     while invalid_number(number1):
-        prompt("Hmm... that doesn't look like a valid number.")
+        prompt(MESSAGES['not valid num'])
         number1 = input()
 
-    number2 = input("=> What's the second number?\n")
+    prompt(MESSAGES['second num'])
+    number2 = input()
 
-    while invalid_number(number1):
-        prompt("Hmm... that doesn't look like a valid number.")
-        number1 = input()
+    while invalid_number(number2):
+        prompt(MESSAGES['not valid num'])
+        number2 = input()
 
-    prompt('What operation would you like to perform?\n'
-          '1) Add 2) Subtract 3) Multiply 4) Divide')
+    prompt(MESSAGES['which op'])
     operation = input()
 
     while operation not in ['1', '2', '3', '4']:
-        prompt('You must choose 1, 2, 3, or 4')
+        prompt(MESSAGES['invalid op'])
         operation = input()
 
     match operation:
@@ -72,10 +71,10 @@ def calculate():
         case '4': # '4' represents division
             output = int(number1) / int(number2)
 
-    prompt(f"The result is: {output}")
+    prompt(f"{MESSAGES['result']}{output}")
 
 # Main calculator code
-prompt('Welcome to Calculator!')
+prompt(MESSAGES['welcome'])
 
 calculate()
 
