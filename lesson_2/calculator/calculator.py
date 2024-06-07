@@ -5,6 +5,7 @@
 # Perform the operation on the two numbers.
 # Print the result to the terminal.
 #   bonus feature: ask the user for another calculation
+import json
 import sys
 
 def prompt(message):
