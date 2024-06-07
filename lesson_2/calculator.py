@@ -5,6 +5,13 @@
 # Perform the operation on the two numbers.
 # Print the result to the terminal.
 #   bonus feature: ask the user for another calculation
+import json
+import sys
+
+with open('calculator_messages.json', 'r') as file:
+    data = json.load(file)
+
+print(data)
 
 def prompt(message):
     print(f'=> {message}')
@@ -23,11 +30,11 @@ def again():
     prompt("Would you like to perform another calculation? (Y/N)")
     while True:
         answer = input().capitalize()
-        if answer == 'Y' or answer == 'Yes':
+        if answer in ('Y', 'Yes'):
             return True
-        elif answer == 'N' or answer == 'No':
+        if answer in ('N', 'No'):
             prompt("Thanks for calculating with me! Have a great day!")
-            exit()
+            sys.exit(0)
         else:
             prompt("Hmmm... you must type Y for yes or N for no.")
 
@@ -36,25 +43,25 @@ def calculate():
     # Ask the user for the first number
     prompt("What's the first number?")
     number1 = input()
-    
+
     while invalid_number(number1):
         prompt("Hmm... that doesn't look like a valid number.")
         number1 = input()
-    
+
     number2 = input("=> What's the second number?\n")
-    
+
     while invalid_number(number1):
         prompt("Hmm... that doesn't look like a valid number.")
         number1 = input()
-    
+
     prompt('What operation would you like to perform?\n'
           '1) Add 2) Subtract 3) Multiply 4) Divide')
     operation = input()
-    
+
     while operation not in ['1', '2', '3', '4']:
         prompt('You must choose 1, 2, 3, or 4')
         operation = input()
-    
+
     match operation:
         case '1': # '1' represents addition
             output = int(number1) + int(number2)
@@ -64,7 +71,7 @@ def calculate():
             output= int(number1) * int(number2)
         case '4': # '4' represents division
             output = int(number1) / int(number2)
-    
+
     prompt(f"The result is: {output}")
 
 # Main calculator code
