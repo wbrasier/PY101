@@ -1,12 +1,26 @@
 {
-    "welcome": "Welcome to Calculator!", 
-    "first num": "What's the first number?", 
-    "second num": "What's the second number?", 
-    "not valid num": "Hmm... that doesn't look like a valid number.", 
-    "which op": "What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide", 
-    "invalid op": "You must choose 1, 2, 3, or 4.", 
-    "result": "The result is : ", 
-    "again?": "Would you like to perform another calculation? (Y/N)", 
-    "goodbye": "Thanks for calculating with me! Have a great day!", 
-    "invalid again": "Hmm... you must type Y for yes or N for no."
+    "en": {
+        "welcome": "Welcome to Calculator!", 
+        "first num": "What's the first number?", 
+        "second num": "What's the second number?", 
+        "not valid num": "Hmm... that doesn't look like a valid number.", 
+        "which op": "What operation would you like to perform?\n1) Add 2) Subtract 3) Multiply 4) Divide", 
+        "invalid op": "You must choose 1, 2, 3, or 4.", 
+        "result": "The result is : ", 
+        "again?": "Would you like to perform another calculation? (Y/N)", 
+        "goodbye": "Thanks for calculating with me! Have a great day!", 
+        "invalid again": "Hmm... you must type Y for yes or N for no."
+    },
+    "es": {
+        "welcome": "Bienvenido a la calculadora !", 
+        "first num": "¿Cual es el primer numero?", 
+        "second num": "¿Cual es el segundo numero?", 
+        "not valid num": "Mmm... eso no parece un número válido.", 
+        "which op": "¿Cual operación le gustaría realizar?\n1) Suma 2) Resta 3) Multiplicación 4) División", 
+        "invalid op": "Debe elegir 1, 2, 3, or 4.", 
+        "result": "El resultado es : ", 
+        "again?": "¿Le gustaría realizar otra operación? (Y/N)", 
+        "goodbye": "¡Gracias por calcular conmigo, que tenga un buen día!", 
+        "invalid again": "Mmm... debe escribir Y para sí o N para no."
+    }
 }
