@@ -16,6 +16,7 @@ def prompt(message):
 def request_loan_amount():
     prompt("What amount is your loan in dollars?")
     total_loan = input("=> Loan amount : ")
+
     while invalid_num(total_loan):
         prompt("That is not a valid input. Please enter the loan amount.")
         prompt("Example: Loan amount of $42,318.50 entered as 42318.50")
@@ -57,15 +58,29 @@ def invalid_length(length):
 
 def request_length_of_time(unit):
     time_length = input(f"=> {unit}: ")
+
     while invalid_length(time_length):
         prompt("That is not a valid input. Enter a whole number.")
         time_length = input(f"=> {unit}: ")
     return time_length
 
+# Asks user for APR (annual percentage rate) and calculates monthly APR
+def request_apr():
+    prompt("What is the APR (Annual Percentage Rate) of the loan?")
+    prompt("Example: 4.8% gets entered as 4.8")
+    apr_input = input("=> APR: ")
+
+    while invalid_num(apr_input):
+        prompt("That is not a valid input. Enter your apr as a number.")
+        prompt("Example: .25% gets entered as .25 or 0.25")
+        apr_input = input("=> APR: ")
+    return apr_input
+
 # asks if the user wants to calculate another loan. If no, the program will exit
 def again():
     prompt('Would you like to calculate another loan? Enter y or n.')
     answer = input('=> ')
+
     while True:
         answer = answer.lower()
         if answer in ('y', 'yes'):
@@ -85,26 +100,16 @@ while True:
 
     total = request_loan_amount()
 
-    # Asks user for APR (annual percentage rate) and calculates monthly APR
-    prompt("What is the APR (Annual Percentage Rate) of the loan?")
-    prompt("Example: 4.8% gets entered as 4.8")
-    apr = input("=> APR: ")
-
-    while invalid_num(apr):
-        prompt("That is not a valid input. Enter your apr as a number.")
-        prompt("Example: .25% gets entered as .25 or 0.25")
-        apr = input("=> APR: ")
+    apr = request_apr()    
 
     if apr != 0:
         apr_monthly = (float(apr)/100) / 12
     else:
         apr_monthly = apr
 
-# Asks user for loan duration in years and months and calculates it in months
     prompt("What is the duration of your loan in years? Months?")
     years = request_length_of_time('Years')
     months = request_length_of_time('Months')
-
     loan_dur_months = calc_total_months(int(years), int(months))
 
     payment = monthly_payment(float(total), apr_monthly, loan_dur_months)
