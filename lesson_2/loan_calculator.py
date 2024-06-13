@@ -76,7 +76,7 @@ def request_apr():
         apr_input = input("=> APR: ")
     return apr_input
 
-# asks if the user wants to calculate another loan. If no, the program will exit
+# asks if the user wants to calculate again. If not the program will exit
 def again():
     prompt('Would you like to calculate another loan? Enter y or n.')
     answer = input('=> ')
@@ -100,7 +100,7 @@ while True:
 
     total = request_loan_amount()
 
-    apr = request_apr()    
+    apr = request_apr()
 
     if apr != 0:
         apr_monthly = (float(apr)/100) / 12
