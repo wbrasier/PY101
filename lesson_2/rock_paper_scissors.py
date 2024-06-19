@@ -1,19 +1,25 @@
 import random
 
-VALID_CHOICES = ['rock', 'paper', 'scissors']
+VALID_CHOICES = ['rock', 'paper', 'scissors', 'lizard', 'spock']
+
+WINNING_MOVES = {
+    'rock': ['lizard', 'scissors'],
+    'lizard': ['paper', 'spock'],
+    'spock': ['scissors', 'rock'],
+    'scissors': ['paper', 'lizard'],
+    'paper': ['rock', 'spock'],
+}
 
 def prompt(message):
     print(f"==> {message}")
 
-# decides and displays winner based on conditions
 def display_winner(player, computer):
-    if ((player == 'rock' and computer == 'scissors') or
-        (player == 'paper' and computer == 'rock') or
-        (player == 'scissors' and computer == 'paper')):
+    player_beats = WINNING_MOVES[player]
+    computer_beats = WINNING_MOVES[computer]
+    
+    if computer in player_beats:
         prompt("You win!")
-    elif ((player == 'rock' and computer == 'paper') or
-        (player == 'paper' and computer == 'scissors') or
-        (player == 'scissors' and computer == 'rock')):
+    elif player in computer_beats:
         prompt("Computer wins!")
     else:
         prompt("It's a tie!")
