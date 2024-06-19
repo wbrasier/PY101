@@ -1,6 +1,12 @@
 import random
 
-VALID_CHOICES = ['rock', 'paper', 'scissors', 'lizard', 'spock']
+VALID_CHOICES = {
+    'r': 'rock',
+    'p': 'paper',
+    'sc': 'scissors',
+    'l': 'lizard',
+    'sp': 'spock',
+    }
 
 WINNING_MOVES = {
     'rock': ['lizard', 'scissors'],
@@ -12,6 +18,27 @@ WINNING_MOVES = {
 
 def prompt(message):
     print(f"==> {message}")
+
+#User is asked to select a move
+def display_instructions():
+    instruction = (f'''
+    ==> Enter your move!
+    ==> 'p' for paper
+        'r' for rock
+        'sp' for spock
+        'sc' for scissors
+        'l' for lizard
+    ''')
+    print(instruction)
+
+def get_user_move():
+    choice_letters = input()
+    while choice_letters not in VALID_CHOICES:
+            prompt("That's not a valid choice.")
+            choice_letters = input().lower()
+
+    choice = VALID_CHOICES[choice_letters]
+    return choice
 
 def display_winner(player, computer):
     player_beats = WINNING_MOVES[player]
@@ -26,20 +53,18 @@ def display_winner(player, computer):
 
 # main game play loop
 while True:
-    #User is asked to select a move
-    prompt(f'Choose one: {", ".join(VALID_CHOICES)}')
-    choice = input()
-    while choice not in VALID_CHOICES:
-        prompt("That's not a valid choice.")
-        choice = input()
+    display_instructions()
+    
+    
+    player_choice = get_user_move()
     
     # computer selects a move randomly
-    computer_choice = random.choice(VALID_CHOICES)
+    computer_choice = random.choice(list(VALID_CHOICES.values()))
     
     # tells the user what was chosen
-    prompt(f"You chose {choice}, computer chose {computer_choice}.")
+    prompt(f"You chose {player_choice}, computer chose {computer_choice}.")
     
-    display_winner(choice, computer_choice)
+    display_winner(player_choice, computer_choice)
 
     # asks if the user wants to play again and breaks if n is entered
     prompt("Do you want to play again? (y/n)")
