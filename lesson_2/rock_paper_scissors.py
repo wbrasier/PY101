@@ -30,6 +30,7 @@ def display_welcome():
 def ask_to_view_rules():
     prompt("Do you want to view the rules? (y/n)")
     answer = input().lower()
+    answer = answer.replace(" ", "")
     while True:
         if answer.startswith('n') or answer.startswith('y'):
             break
@@ -67,6 +68,7 @@ def display_instructions():
 
 def get_user_move():
     choice_letters = input()
+    choice_letters = choice_letters.replace(" ", "")
     while choice_letters not in VALID_CHOICES:
         prompt("That's not a valid choice.")
         choice_letters = input().lower()
@@ -111,6 +113,7 @@ def display_champ(champion):
 def again():
     prompt("Do you want to play again? (y/n)")
     answer = input().lower()
+    answer = answer.replace(" ", "")
     while True:
         if answer.startswith('n') or answer.startswith('y'):
             break
