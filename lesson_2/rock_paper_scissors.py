@@ -96,10 +96,9 @@ def display_round_winner(champ):
 def check_for_champ(points):
     if points['player'] == POINTS_TO_WIN:
         return 'player'
-    elif points['computer'] == POINTS_TO_WIN:
+    if points['computer'] == POINTS_TO_WIN:
         return 'computer'
-    else:
-        return False
+    return False
 
 def display_champ(champion):
     match champion:
@@ -121,7 +120,7 @@ def again():
         return False
     return True
 
-# main game play function 
+# main game play function
 def rps_game(points):
     # round loop that continues until somebody wins (best of ROUNDS)
     while True:
@@ -133,7 +132,7 @@ def rps_game(points):
         computer_choice = random.choice(list(VALID_CHOICES.values()))
 
         os.system('clear')
-        
+
         # tells the user what was chosen
         prompt(f"You chose {player_choice}, computer chose {computer_choice}.")
 
