@@ -27,8 +27,9 @@ def display_welcome():
     prompt('Welcome to Rock, Paper, Scissors, Spock, Lizard!')
     prompt(f'The best out of {ROUNDS} rounds wins!')
 
-def ask_to_view_rules():
-    prompt("Do you want to view the rules? (y/n)")
+# Returns True if yes, False if no
+def yes_or_no(question):
+    prompt(question)
     answer = input().lower()
     answer = answer.replace(" ", "")
     while True:
@@ -40,7 +41,7 @@ def ask_to_view_rules():
         return False
     return True
 
-def view_rules():
+def display_rules():
     print('''
     Scissors cuts Paper
     Paper covers Rock
@@ -67,13 +68,20 @@ def display_instructions():
     print(instruction)
 
 def get_user_move():
-    choice_letters = input()
+    choice_letters = input().lower()
     choice_letters = choice_letters.replace(" ", "")
-    while choice_letters not in VALID_CHOICES:
+    print(VALID_CHOICES)
+    print(choice_letters not in VALID_CHOICES)
+    while (choice_letters not in VALID_CHOICES and 
+    choice_letters not in list(VALID_CHOICES.values())):
         prompt("That's not a valid choice.")
         choice_letters = input().lower()
-
-    choice = VALID_CHOICES[choice_letters]
+        choice_letters = choice_letters.replace(" ", "")
+    
+    if len(choice_letters) <= 2:
+        choice = VALID_CHOICES[choice_letters]
+    else:
+        choice = choice_letters
     return choice
 
 def determine_round_winner(player, computer):
@@ -109,20 +117,6 @@ def display_champ(champion):
         case 'computer':
             prompt('The champion is the computer. Better luck next time!')
 
-# asks if the user wants to play again and breaks if n is entered
-def again():
-    prompt("Do you want to play again? (y/n)")
-    answer = input().lower()
-    answer = answer.replace(" ", "")
-    while True:
-        if answer.startswith('n') or answer.startswith('y'):
-            break
-        prompt('Please enter "y" or "n".')
-        answer = input().lower()
-    if answer[0] == 'n':
-        return False
-    return True
-
 # main game play function
 def rps_game(points):
     # round loop that continues until somebody wins (best of ROUNDS)
@@ -156,14 +150,15 @@ def rps_game(points):
 os.system('clear')
 display_welcome()
 
-if ask_to_view_rules():
-    view_rules()
+if yes_or_no("Do you want to view the rules? (y/n)"):
+    display_rules()
 
 # Loop that continues until the user doesn't want to play again
 while True:
+    os.system('clear')
     # initializes scores at 0 for computer and player
     scores = { 'player' : 0, 'computer': 0}
     rps_game(scores)
-    if not again():
+    if not yes_or_no("Do you want to play again? (y/n)"):
         prompt('Thanks for playing!')
         break
